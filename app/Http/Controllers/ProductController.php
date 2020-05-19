@@ -4,12 +4,17 @@ namespace App\Http\Controllers;
 use Illuminate\Support\Str;
 use App\Product;
 use App\Category;
+use App\Product_multiple_photo;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
 use Image;
 
 class ProductController extends Controller
 {
+      public function __construct(){
+        $this->middleware('auth')->except(['index', 'show']);
+        $this->middleware('verified')->except(['index', 'show']);
+      }
     /**
      * Display a listing of the resource.
      *
@@ -19,7 +24,8 @@ class ProductController extends Controller
     {
 
       return view('cit.product.index', [
-        'categories' => Category::all()
+        'categories' => Category::all(),
+        'products' => Product::all()
       ]);
     }
 
@@ -72,6 +78,11 @@ class ProductController extends Controller
           $new_product_location = base_path('public/uploads/product_multiple/'.$new_product_img_name);
           Image::make($single_image)->resize(600, 550)->save($new_product_location);
           // photo upload code one by one end
+          Product_multiple_photo::insert([
+            'product_id' => $product_id,
+            'multiple_photo_name' => $new_product_img_name,
+            'created_at' => Carbon::now()
+          ]);
           $flag++;
         }
         return back();

@@ -11,7 +11,7 @@
                     <div class="breadcumb-wrap text-center">
                         <h2>Shop Page</h2>
                         <ul>
-                            <li><a href="index.html">Home</a></li>
+                            <li><a href="{{ url('/') }}">Home</a></li>
                             <li><span>Shop</span></li>
                         </ul>
                     </div>
@@ -27,44 +27,31 @@
                 <div class="col-lg-6">
                     <div class="product-single-img">
                         <div class="product-active owl-carousel">
+
+                          <div class="item">
+                            <img src="{{ asset('uploads/product_thumbnail') }}/{{ $product_info->product_thumbnail_photo }}" alt="">
+                          </div>
+
+                          @foreach ( $product_info->get_multiple_photo  as $multiple_photo)
+
                             <div class="item">
-                                <img src="assets/images/product/product-details/1.jpg" alt="">
+                              <img src="{{ asset('uploads/product_multiple') }}/{{ $multiple_photo->multiple_photo_name }}" alt="">
                             </div>
-                            <div class="item">
-                                <img src="assets/images/product/product-details/2.jpg" alt="">
-                            </div>
-                            <div class="item">
-                                <img src="assets/images/product/product-details/3.jpg" alt="">
-                            </div>
-                            <div class="item">
-                                <img src="assets/images/product/product-details/4.jpg" alt="">
-                            </div>
-                            <div class="item">
-                                <img src="assets/images/product/product-details/5.jpg" alt="">
-                            </div>
-                            <div class="item">
-                                <img src="assets/images/product/product-details/6.jpg" alt="">
-                            </div>
+                          @endforeach
+
+
+
                         </div>
                         <div class="product-thumbnil-active  owl-carousel">
+                          <div class="item">
+                            <img src="{{ asset('uploads/product_thumbnail') }}/{{ $product_info->product_thumbnail_photo }}" alt="">
+                          </div>
+                          @foreach ( $product_info->get_multiple_photo  as $multiple_photo)
+
                             <div class="item">
-                                <img src="assets/images/product/product-details/1.jpg" alt="">
+                              <img src="{{ asset('uploads/product_multiple') }}/{{ $multiple_photo->multiple_photo_name }}" alt="">
                             </div>
-                            <div class="item">
-                                <img src="assets/images/product/product-details/2.jpg" alt="">
-                            </div>
-                            <div class="item">
-                                <img src="assets/images/product/product-details/3.jpg" alt="">
-                            </div>
-                            <div class="item">
-                                <img src="assets/images/product/product-details/4.jpg" alt="">
-                            </div>
-                            <div class="item">
-                                <img src="assets/images/product/product-details/5.jpg" alt="">
-                            </div>
-                            <div class="item">
-                                <img src="assets/images/product/product-details/6.jpg" alt="">
-                            </div>
+                          @endforeach
                         </div>
                     </div>
                 </div>
@@ -82,7 +69,9 @@
                                 <li>(05 Customar Review)</li>
                             </ul>
                         </div>
-                        <p>{{ $product_info->product_short_description }}</p>
+                        <p>{{ $product_info->product_short_description }}
+
+                        </p>
                         <ul class="input-style">
                             <li class="quantity cart-plus-minus">
                                 <input type="text" value="1" />

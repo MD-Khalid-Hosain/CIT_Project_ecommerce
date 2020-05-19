@@ -14,15 +14,16 @@ class FrontendController extends Controller
 {
 
   public function __construct(){
-    $this->middleware('auth');
-    $this->middleware('verified');
+    $this->middleware('auth')->except('index');
+    $this->middleware('verified')->except('index');
   }
   /*======Welcome page======*/
   function index()
     {
       return view('cit.frontend.index', [
         'categories' => Category::all(),
-        'products' => Product::all()
+        // 'products' => Product::orderBy('id', 'desc')->get() //we can use this fuction
+        'products' => Product::latest()->get() //also we can youse this fuction both fuction will work same thing
       ]);
     }
 
