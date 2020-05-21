@@ -33,11 +33,13 @@ Route::get('/faq/force/delete/{faq_id}', 'HomeController@faq_force_delete')->nam
 //change Password
 Route::post('/change/password', 'HomeController@change_password')->name('change_password');
 
+Route::get('/edit/profile', 'HomeController@edit_profile');
 /*======End Routes for HomeController======*/
 //socialite routes
-Route::get('login/facebook', 'GithubController@redirectToProvider');
-Route::get('login/facebook/callback', 'GithubController@handleProviderCallback');
-Route::get('/edit/profile', 'HomeController@edit_profile');
+Route::get('register/github', 'GithubController@redirectToProvider');
+Route::get('register/github/callback', 'GithubController@handleProviderCallback');
+
+
 
 
 

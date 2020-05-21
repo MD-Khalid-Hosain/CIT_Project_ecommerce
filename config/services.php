@@ -31,9 +31,9 @@ return [
     ],
 
 
-  'github' => [
+    'github' => [
       'client_id' => env('GITHUB_CLIENT_ID'),
       'client_secret' => env('GITHUB_CLIENT_SECRET'),
-      'redirect' => 'http://127.0.0.1:8000/login/facebook/callback',
+      'redirect' => 'http://127.0.0.1:8000/register/github/callback',
   ],
 ];
