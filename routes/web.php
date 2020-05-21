@@ -46,9 +46,8 @@ Route::resource('category', 'CategoryController');
 Route::resource('product', 'ProductController');
 
 
-
-
-
+//middleware controller for customer
+Route::get('home/customer', 'CustomerController@homecustomer');
 
 Auth::routes(['verify' => true]);
 

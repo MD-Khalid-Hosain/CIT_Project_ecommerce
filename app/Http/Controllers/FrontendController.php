@@ -16,6 +16,7 @@ class FrontendController extends Controller
   public function __construct(){
     $this->middleware('auth')->except('index');
     $this->middleware('verified')->except('index');
+    $this->middleware('checkrole');
   }
   /*======Welcome page======*/
   function index()

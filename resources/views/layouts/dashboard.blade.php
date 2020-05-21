@@ -55,10 +55,11 @@
 
       <label class="sidebar-label">Navigation</label>
       <div class="sl-sideleft-menu">
+      @if (Auth::user()->role == 1)
         <a href="{{ url('user/list') }}" class="sl-menu-link @yield('Home')">
           <div class="sl-menu-item">
             <i class="menu-item-icon icon ion-ios-home-outline tx-22"></i>
-            <span class="menu-item-label">Home</span>
+            <span class="menu-item-label">Admin Home</span>
           </div><!-- menu-item -->
         </a><!-- sl-menu-link -->
 
@@ -86,6 +87,14 @@
             <span class="menu-item-label">Add Product</span>
           </div><!-- menu-item -->
         </a><!-- sl-menu-link -->
+        @else
+          <a href="{{ url('home/customer') }}" class="sl-menu-link @yield('Home')">
+            <div class="sl-menu-item">
+              <i class="menu-item-icon icon ion-ios-home-outline tx-22"></i>
+              <span class="menu-item-label">Customer Home</span>
+            </div><!-- menu-item -->
+          </a><!-- sl-menu-link -->
+      @endif
       </div><!-- sl-sideleft-menu -->
 
       <br>

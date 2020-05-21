@@ -24,6 +24,8 @@ class HomeController extends Controller
     public function __construct()
     {
         $this->middleware('auth');
+        $this->middleware('verified');
+        $this->middleware('checkrole');
     }
 
     /**
@@ -33,7 +35,9 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+      $loged_in_id = Auth::id();
+      $user_lists = User::where('id', '!=', $loged_in_id)->orderBy('id', 'desc')->paginate(2);
+        return view('cit.user_list', compact('user_lists'));
     }
 
     /*======faq_form page======*/

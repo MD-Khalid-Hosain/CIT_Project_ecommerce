@@ -75,7 +75,7 @@
           <button type="submit" class="btn btn-info btn-block">Sign In</button>
         </form>
 
-        <div class="mg-t-60 tx-center">Not yet a member? <a href="page-signup.html" class="tx-info">Sign Up</a></div>
+        <div class="mg-t-60 tx-center">Not yet a member? <a href="{{ route('register') }}" class="tx-info">Sign Up</a></div>
       </div><!-- login-wrapper -->
     </div><!-- d-flex -->
 
