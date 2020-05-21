@@ -22,6 +22,7 @@ class CreateProductsTable extends Migration
             $table->integer('category_id');
             $table->string('product_thumbnail_photo')->default('default_photo.jpg');;
             $table->text('product_slug');
+            $table->integer('quantity')->default(0);
             $table->timestamps();
         });
     }

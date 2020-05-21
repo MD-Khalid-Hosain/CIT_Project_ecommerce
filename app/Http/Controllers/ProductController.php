@@ -58,6 +58,7 @@ class ProductController extends Controller
           'product_long_description' =>$request->product_long_description,
 
           'product_slug' => $slug,
+          'quantity' => $request->quantity,
           'created_at' =>Carbon::now()
         ]);
         // photo upload start

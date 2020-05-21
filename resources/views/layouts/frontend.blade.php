@@ -28,6 +28,7 @@
     <link rel="stylesheet" href="{{ asset('frontend_assets/assets/css/styles.css') }}">
     <!-- responsive css -->
     <link rel="stylesheet" href="{{ asset('frontend_assets/assets/css/responsive.css') }}">
+
     <!-- modernizr css -->
     <script src="{{ asset('frontend_assets/assets/js/vendor/modernizr-2.8.3.min.js') }}"></script>
 </head>
@@ -166,42 +167,31 @@
                                 </ul>
                             </li>
                             <li>
-                                <a href="javascript:void(0);"><i class="flaticon-shop"></i> <span>3</span></a>
+                                <a href="javascript:void(0);"><i class="flaticon-shop"></i> <span>
+                                  {{ App\Cart::where('ip_address', request()->ip())->count() }}
+                                </span></a>
                                 <ul class="cart-wrap dropdown_style">
+                                  @php
+                                    $sub_total = 0;
+                                  @endphp
+                                  @foreach ( App\Cart::where('ip_address', request()->ip())->get() as $cart)
                                     <li class="cart-items">
                                         <div class="cart-img">
                                             <img src="assets/images/cart/1.jpg" alt="">
                                         </div>
                                         <div class="cart-content">
-                                            <a href="cart.html">Pure Nature Product</a>
-                                            <span>QTY : 1</span>
-                                            <p>$35.00</p>
+                                            <a href="cart.html">{{ $cart->relationWithProductTable->product_name }}</a>
+                                            <span>QTY : {{ $cart->amount }}</span>
+                                            @php
+                                              $sub_total = $sub_total + ($cart->relationWithProductTable->product_price * $cart->amount);
+                                            @endphp
+                                            <p>${{ $cart->relationWithProductTable->product_price * $cart->amount }}</p>
                                             <i class="fa fa-times"></i>
                                         </div>
-                                    </li>
-                                    <li class="cart-items">
-                                        <div class="cart-img">
-                                            <img src="assets/images/cart/3.jpg" alt="">
-                                        </div>
-                                        <div class="cart-content">
-                                            <a href="cart.html">Pure Nature Product</a>
-                                            <span>QTY : 1</span>
-                                            <p>$35.00</p>
-                                            <i class="fa fa-times"></i>
-                                        </div>
-                                    </li>
-                                    <li class="cart-items">
-                                        <div class="cart-img">
-                                            <img src="assets/images/cart/2.jpg" alt="">
-                                        </div>
-                                        <div class="cart-content">
-                                            <a href="cart.html">Pure Nature Product</a>
-                                            <span>QTY : 1</span>
-                                            <p>$35.00</p>
-                                            <i class="fa fa-times"></i>
-                                        </div>
-                                    </li>
-                                    <li>Subtotol: <span class="pull-right">$70.00</span></li>
+                                      </li>
+                                  @endforeach
+
+                                    <li>Subtotol: <span class="pull-right">${{ $sub_total }}</span></li>
                                     <li>
                                         <button>Check Out</button>
                                     </li>

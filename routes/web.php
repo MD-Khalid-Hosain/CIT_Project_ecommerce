@@ -35,6 +35,9 @@ Route::post('/change/password', 'HomeController@change_password')->name('change_
 
 Route::get('/edit/profile', 'HomeController@edit_profile');
 /*======End Routes for HomeController======*/
+
+
+
 //socialite routes
 Route::get('login/github', 'GithubController@redirectToProvider');
 Route::get('register/github/callback', 'GithubController@handleProviderCallback');
@@ -43,7 +46,10 @@ Route::get('register/github/callback', 'GithubController@handleProviderCallback'
 Route::get('login/google', 'GoogleController@redirectToProvider');
 Route::get('register/google/callback', 'GoogleController@handleProviderCallback');
 
+//cart controller start
+Route::post('add/to/cart', 'CartController@addtocart');
 
+//cart controller end
 
 
 

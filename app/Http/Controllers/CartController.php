@@ -1,0 +1,31 @@
+<?php
+
+namespace App\Http\Controllers;
+
+use Illuminate\Http\Request;
+use Carbon\Carbon;
+use App\Cart;
+use DB;
+class CartController extends Controller
+{
+    public function addtocart(Request $request){
+
+
+
+      if(Cart::where('ip_address', $request->ip())->where('product_id', $request->product_id)->exists()){
+        Cart::where('ip_address', $request->ip())->where('product_id', $request->product_id)->increment('amount', $request->amount);
+      }
+      else{
+        DB::table('carts')->insert([
+          'ip_address' => $request->ip(),
+          'product_id' => $request->product_id,
+          'amount' => $request->amount,
+          'created_at' => Carbon::now()
+        ]);
+      }
+
+
+
+      return back()->with('cart_status', 'Product added to cart !!');
+    }
+}

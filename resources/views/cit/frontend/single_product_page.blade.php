@@ -58,6 +58,7 @@
                 <div class="col-lg-6">
                     <div class="product-single-content">
                         <h3>{{ $product_info->product_name }}</h3>
+                        <h6>Available quantity: {{ $product_info->quantity }} </h6>
                         <div class="rating-wrap fix">
                             <span class="pull-left">${{ $product_info->product_price }}</span>
                             <ul class="rating pull-right">
@@ -72,12 +73,19 @@
                         <p>{{ $product_info->product_short_description }}
 
                         </p>
+                        {{-- about cart part start --}}
                         <ul class="input-style">
+                          <form  action="{{ url('add/to/cart') }}" method="post">
+                            @csrf
+                            <input type="hidden" name="product_id" value="{{ $product_info->id }}">
                             <li class="quantity cart-plus-minus">
-                                <input type="text" value="1" />
+                                <input type="text" value="1" name="amount">
                             </li>
-                            <li><a href="cart.html">Add to Cart</a></li>
+                            <li><button type="submit" class="btn btn-danger">Add to Cart</button></li>
+
+                          </form>
                         </ul>
+                        {{-- about cart part end --}}
                         <ul class="cetagory">
                             <li>Categories:</li>
                             <li><a href="#">{{ $product_info->connect_to_category_table->category_name }}</a></li>
