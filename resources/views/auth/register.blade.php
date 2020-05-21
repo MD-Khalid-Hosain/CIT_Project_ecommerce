@@ -81,7 +81,7 @@
 
         <div class="form-group tx-12">By clicking the Sign Up button below, you agreed to our privacy policy and terms of use of our website.</div>
         <button type="submit" class="btn btn-info btn-block">Sign Up</button>
-        <a href="{{ url('register/github') }}" class="btn btn-success btn-block">Sign Up With GitHub</a>
+      
       </form>
 
         <div class="mg-t-40 tx-center">Already have an account? <a href="{{ route('login') }}" class="tx-info">Sign In</a></div>

@@ -73,6 +73,8 @@
               @endif
           </div><!-- form-group -->
           <button type="submit" class="btn btn-info btn-block">Sign In</button>
+          <a href="{{ url('login/github') }}" class="btn btn-success btn-block">Sign In With GitHub</a>
+          <a href="{{ url('login/google') }}" class="btn btn-danger btn-block">Sign In With Google</a>
         </form>
 
         <div class="mg-t-60 tx-center">Not yet a member? <a href="{{ route('register') }}" class="tx-info">Sign Up</a></div>

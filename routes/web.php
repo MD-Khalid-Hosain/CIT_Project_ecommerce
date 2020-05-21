@@ -36,8 +36,12 @@ Route::post('/change/password', 'HomeController@change_password')->name('change_
 Route::get('/edit/profile', 'HomeController@edit_profile');
 /*======End Routes for HomeController======*/
 //socialite routes
-Route::get('register/github', 'GithubController@redirectToProvider');
+Route::get('login/github', 'GithubController@redirectToProvider');
 Route::get('register/github/callback', 'GithubController@handleProviderCallback');
+
+//google socialite routes
+Route::get('login/google', 'GoogleController@redirectToProvider');
+Route::get('register/google/callback', 'GoogleController@handleProviderCallback');
 
 
 

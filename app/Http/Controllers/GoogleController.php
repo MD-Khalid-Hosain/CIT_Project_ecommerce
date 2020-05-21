@@ -8,7 +8,7 @@ use App\User;
 use Auth;
 use Carbon\Carbon;
 
-class GithubController extends Controller
+class GoogleController extends Controller
 {
   /**
   * Redirect the user to the GitHub authentication page.
@@ -17,7 +17,7 @@ class GithubController extends Controller
   */
  public function redirectToProvider()
  {
-     return Socialite::driver('github')->redirect();
+     return Socialite::driver('google')->redirect();
  }
 
  /**
@@ -28,13 +28,16 @@ class GithubController extends Controller
  public function handleProviderCallback()
  {
    //stor information in user varibale
-     $user = Socialite::driver('github')->user();
+     $user = Socialite::driver('google')->stateless()->user();
+     /*==========================================================================================================================
+     if i am not use stateless function then it will show an error that is "laravel socialite two invalidstateexception localhost"
+     ============================================================================================================================*/
 
      //if account not created
 
      if(!User::where('email', $user->getEmail())->exists()){
        User::create([
-         'name'=>$user->getNickname(),
+         'name'=>$user->getName(),
          'email'=>$user->getEmail(),
          'password'=> bcrypt('abc@123'),
          'role'=>2,
