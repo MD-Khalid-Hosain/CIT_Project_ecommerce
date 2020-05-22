@@ -48,6 +48,8 @@ Route::get('register/google/callback', 'GoogleController@handleProviderCallback'
 
 //cart controller start
 Route::post('add/to/cart', 'CartController@addtocart');
+Route::get('delete/from/cart/{cart_id}', 'CartController@delete_from_cart');
+Route::get('cart', 'CartController@cart');
 
 //cart controller end
 

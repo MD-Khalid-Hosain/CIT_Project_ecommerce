@@ -24,8 +24,14 @@ class CartController extends Controller
         ]);
       }
 
-
-
       return back()->with('cart_status', 'Product added to cart !!');
+    }
+
+    function delete_from_cart($cart_id){
+      Cart::find($cart_id)->delete();
+      return back();
+    }
+    function cart(){
+      return view('cit.frontend.cart');
     }
 }

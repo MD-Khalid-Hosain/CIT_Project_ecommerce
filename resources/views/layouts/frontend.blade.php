@@ -168,13 +168,11 @@
                             </li>
                             <li>
                                 <a href="javascript:void(0);"><i class="flaticon-shop"></i> <span>
-                                  {{ App\Cart::where('ip_address', request()->ip())->count() }}
+                                  {{ cart_total_product() }}
                                 </span></a>
                                 <ul class="cart-wrap dropdown_style">
-                                  @php
-                                    $sub_total = 0;
-                                  @endphp
-                                  @foreach ( App\Cart::where('ip_address', request()->ip())->get() as $cart)
+
+                                  @forelse ( cart_product_show() as $cart)
                                     <li class="cart-items">
                                         <div class="cart-img">
                                             <img src="assets/images/cart/1.jpg" alt="">
@@ -182,18 +180,18 @@
                                         <div class="cart-content">
                                             <a href="cart.html">{{ $cart->relationWithProductTable->product_name }}</a>
                                             <span>QTY : {{ $cart->amount }}</span>
-                                            @php
-                                              $sub_total = $sub_total + ($cart->relationWithProductTable->product_price * $cart->amount);
-                                            @endphp
+
                                             <p>${{ $cart->relationWithProductTable->product_price * $cart->amount }}</p>
-                                            <i class="fa fa-times"></i>
+                                            <a href="{{ url('delete/from/cart') }}/{{ $cart->id }}"><i class="fa fa-times"></i></a>
                                         </div>
                                       </li>
-                                  @endforeach
+                                      @empty
+                                      <li>NO CART ITEM</li>
+                                  @endforelse
 
-                                    <li>Subtotol: <span class="pull-right">${{ $sub_total }}</span></li>
+                                    <li>Subtotol: <span class="pull-right">${{ cart_subtotal() }}</span></li>
                                     <li>
-                                        <button>Check Out</button>
+                                        <a href="{{ URL::to('cart') }}" class="btn btn-danger">Go to Cart</a>
                                     </li>
                                 </ul>
                             </li>
