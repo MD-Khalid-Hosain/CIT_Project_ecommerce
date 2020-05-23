@@ -31,7 +31,21 @@ class CartController extends Controller
       Cart::find($cart_id)->delete();
       return back();
     }
+
+    
     function cart(){
       return view('cit.frontend.cart');
+    }
+
+
+    function update_cart(Request $request){
+      foreach ($request->cart_id as $key => $id) {
+        Cart::find($id)->update([
+          'amount' => $request->cart_quantity[$key]
+        ]);
+
+      }
+      return back();
+
     }
 }

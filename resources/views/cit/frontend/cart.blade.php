@@ -27,7 +27,8 @@ active
         <div class="container">
             <div class="row">
                 <div class="col-12">
-                    <form action="http://themepresss.com/tf/html/tohoney/cart">
+                    <form action="{{ url('update/cart') }}" method="post">
+                      @csrf
                         <table class="table-responsive cart-wrap">
                             <thead>
                                 <tr>
@@ -45,8 +46,9 @@ active
                                     <td class="images"><img src="{{ asset('uploads/product_thumbnail') }}/{{ $cart_product->relationWithProductTable->product_thumbnail_photo }}"  alt="{{ $cart_product->relationWithProductTable->product_thumbnail_photo }}"></td>
                                     <td class="product"><a href="{{ url('product') }}/{{ $cart_product->relationWithProductTable->product_slug }}" target= "_blank" >{{ $cart_product->relationWithProductTable->product_name }}</a></td>
                                     <td class="ptice">${{ $cart_product->relationWithProductTable->product_price }}</td>
+                                    <input type="hidden" value="{{ $cart_product->id }}" name="cart_id[]">
                                     <td class="quantity cart-plus-minus">
-                                        <input type="text" value="{{ $cart_product->amount }}" />
+                                        <input type="text" value="{{ $cart_product->amount }}" name="cart_quantity[]">
                                     </td>
                                     <td class="total">${{ $cart_product->relationWithProductTable->product_price * $cart_product->amount }}</td>
                                     <td class="remove"><a href="{{ url('delete/from/cart') }}/{{ $cart_product->id }}"><i class="fa fa-times"></i></a></i></td>
@@ -61,9 +63,9 @@ active
                                 <div class="cartcupon-wrap">
                                     <ul class="d-flex">
                                         <li>
-                                            <button>Update Cart</button>
+                                            <button type="submit" >Update Cart</button>
                                         </li>
-                                        <li><a href="shop.html">Continue Shopping</a></li>
+                                        <li><a href="{{ url('/') }}">Continue Shopping</a></li>
                                     </ul>
                                     <h3>Cupon</h3>
                                     <p>Enter Your Cupon Code if You Have One</p>
