@@ -25,7 +25,7 @@ class HomeController extends Controller
     {
         $this->middleware('auth');
         $this->middleware('verified');
-        $this->middleware('checkrole');
+        $this->middleware('checkrole')->except(['edit_profile','change_password']);
     }
 
     /**

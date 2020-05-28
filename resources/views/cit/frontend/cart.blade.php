@@ -10,6 +10,7 @@ active
         <div class="container">
             <div class="row">
                 <div class="col-12">
+
                     <div class="breadcumb-wrap text-center">
                         <h2>Shopping Cart</h2>
                         <ul>
@@ -26,7 +27,15 @@ active
     <div class="cart-area ptb-100">
         <div class="container">
             <div class="row">
-                <div class="col-12">
+                <div class="col-md-12">
+                  @if ($errors->all())
+                    <div class="alert alert-danger">
+                      @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                      @endforeach
+                    </div>
+                  @endif
+
                     <form action="{{ url('update/cart') }}" method="post">
                       @csrf
                         <table class="table-responsive cart-wrap">
@@ -64,14 +73,15 @@ active
                                     <ul class="d-flex">
                                         <li>
                                             <button type="submit" >Update Cart</button>
+                                          </form>
                                         </li>
                                         <li><a href="{{ url('/') }}">Continue Shopping</a></li>
                                     </ul>
                                     <h3>Cupon</h3>
                                     <p>Enter Your Cupon Code if You Have One</p>
-                                    <div class="cupon-wrap">
-                                        <input type="text" placeholder="Cupon Code">
-                                        <button>Apply Cupon</button>
+                                    <div>
+                                        <input type="text" placeholder="Cupon Code" id="coupon-text" value="{{ $coupon_name ?? "" }}">
+                                        <a class="btn btn-danger" id="apply-btn">Apply Cupon</a>
                                     </div>
                                 </div>
                             </div>
@@ -80,16 +90,43 @@ active
                                     <h3>Cart Totals</h3>
                                     <ul>
                                         <li><span class="pull-left">Subtotal </span>${{ cart_subtotal() }}</li>
-                                        <li><span class="pull-left"> Total </span> $380.00</li>
+                                        @isset($coupon_discount)
+
+                                          <li><span class="pull-left"> Coupon Discount</span> {{ $coupon_discount }}%</li>
+                                        @endisset
+                                        <li><span class="pull-left"> Total </span>
+                                          @isset($coupon_discount)
+                                            ${{ $total_from_cart = (cart_subtotal() - (($coupon_discount/100) * cart_subtotal())) }}
+                                          @else
+                                            ${{ $total_from_cart = cart_subtotal() }}
+                                          @endisset
+                                        </li>
                                     </ul>
-                                    <a href="checkout.html">Proceed to Checkout</a>
+                                      <form  action="{{ url('checkout') }}" method="post">
+                                        @csrf
+                                        <input type="hidden" name="coupon_name_from_cart" value="{{ $coupon_name ?? "" }}">
+                                        <input type="hidden" name="total_from_cart" value="{{ $total_from_cart }}">
+                                        <button type="submit" class="btn btn-danger">Proceed to Checkout</button>
+                                      </form>
                                 </div>
                             </div>
                         </div>
-                    </form>
+
                 </div>
             </div>
         </div>
     </div>
     <!-- cart-area end -->
+@endsection
+@section('footer_script')
+  {{-- my javascript function --}}
+  <script type="text/javascript">
+    $(document).ready(function(){
+      $('#apply-btn').click(function(){
+        var coupon_text = $('#coupon-text').val();
+        var link_to_go = "{{ url('cart') }}/"+coupon_text;
+        window.location.href = link_to_go;
+      });
+    });
+  </script>
 @endsection

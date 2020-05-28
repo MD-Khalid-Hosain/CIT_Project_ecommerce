@@ -15,7 +15,7 @@ class CategoryController extends Controller
   {
       $this->middleware('auth');
       $this->middleware('verified');
-      $this->middleware('checkrole');
+      $this->middleware('checkrolecustomer');
   }
     /**
      * Display a listing of the resource.

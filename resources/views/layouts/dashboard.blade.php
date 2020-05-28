@@ -87,6 +87,12 @@
             <span class="menu-item-label">Add Product</span>
           </div><!-- menu-item -->
         </a><!-- sl-menu-link -->
+        <a href="{{ route('coupon.index') }}" class="sl-menu-link @yield('coupon')">
+          <div class="sl-menu-item">
+            <i class="menu-item-icon icon fa fa-navicon  tx-20"></i>
+            <span class="menu-item-label">Add Coupon</span>
+          </div><!-- menu-item -->
+        </a><!-- sl-menu-link -->
         @else
           <a href="{{ url('home/customer') }}" class="sl-menu-link @yield('Home')">
             <div class="sl-menu-item">

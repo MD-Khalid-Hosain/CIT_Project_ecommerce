@@ -6,6 +6,7 @@
     <title>Tohoney - @yield('title')</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <link rel="shortcut icon" type="image/png" href="assets/images/favicon.png">
     <!-- Place favicon.ico in the root directory -->
     <!-- all css here -->
@@ -31,6 +32,7 @@
 
     <!-- modernizr css -->
     <script src="{{ asset('frontend_assets/assets/js/vendor/modernizr-2.8.3.min.js') }}"></script>
+      @yield('header_script')
 </head>
 
 <body>
@@ -100,6 +102,7 @@
                             <ul class="d-flex">
                                 <li class="@yield('home')"><a href="{{ url('/') }}">Home</a></li>
                                 <li class="@yield('about')"><a href="{{ url('about/page') }}">About</a></li>
+                                <li class="@yield('shop')"><a href="{{ url('shop/page') }}">Shop</a></li>
                                 <li>
                                     <a href="javascript:void(0);">Shop <i class="fa fa-angle-down"></i></a>
                                     <ul class="dropdown_style">
@@ -417,6 +420,10 @@
     <script src="{{ asset('frontend_assets/assets/js/jquery-ui.min.js') }}"></script>
     <!-- main js -->
     <script src="{{ asset('frontend_assets/assets/js/scripts.js') }}"></script>
+
+
+    @yield('footer_script')
+
   </body>
 
 

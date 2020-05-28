@@ -13,11 +13,7 @@ use App\Http\Requests\Faq_Form_validate;
 class FrontendController extends Controller
 {
 
-  public function __construct(){
-    $this->middleware('auth')->except('index');
-    $this->middleware('verified')->except('index');
-    
-  }
+
   /*======Welcome page======*/
   function index()
     {
@@ -27,7 +23,12 @@ class FrontendController extends Controller
         'products' => Product::latest()->get() //also we can youse this fuction both fuction will work same thing
       ]);
     }
-
+    function shop(){
+      return view('cit.frontend.shop', [
+        'products' =>Product::all(),
+        'categories' =>Category::all()
+      ]);
+    }
   function contact(){
     return view('cit.frontend.contact');
   }

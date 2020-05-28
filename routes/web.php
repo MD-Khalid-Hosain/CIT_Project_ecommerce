@@ -5,6 +5,7 @@ Route::get('/','FrontendController@index');
 Route::get('/contact/page','FrontendController@contact');
 Route::get('/about/page','FrontendController@about');
 Route::get('/faq/page','FrontendController@faq');
+Route::get('/shop/page','FrontendController@shop');
 
 /*======End Routes for FrontendController======*/
 
@@ -49,16 +50,23 @@ Route::get('register/google/callback', 'GoogleController@handleProviderCallback'
 //cart controller start
 Route::post('add/to/cart', 'CartController@addtocart');
 Route::get('delete/from/cart/{cart_id}', 'CartController@delete_from_cart');
-Route::get('cart', 'CartController@cart');
 Route::post('update/cart', 'CartController@update_cart');
+Route::get('cart', 'CartController@cart');
+Route::get('cart/{coupon_name}', 'CartController@cart');
 
 //cart controller end
-
+ //checkout controller
+ Route::post('checkout','CheckoutController@index');
+ Route::post('checkout/post','CheckoutController@checkoutpost');
+ // ajax request link
+ Route::post('get/city/list','CheckoutController@get_city_list');
+ Route::post('stripe', 'StripePaymentController@stripePost')->name('stripe.post');
 
 
 // Resource controller
 Route::resource('category', 'CategoryController');
 Route::resource('product', 'ProductController');
+Route::resource('coupon', 'CouponController');
 
 
 //middleware controller for customer

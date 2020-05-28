@@ -5,7 +5,7 @@ namespace App\Http\Middleware;
 use Closure;
 use Auth;
 
-class CheckRole
+class CheckRoleCustomer
 {
     /**
      * Handle an incoming request.
@@ -16,11 +16,9 @@ class CheckRole
      */
     public function handle($request, Closure $next)
     {
-        if(Auth::user()->role == 2){
-          return redirect('home/customer');
-        }
-      
-
+      if(Auth::user()->role == 1){
+        return redirect('home');
+      }
         return $next($request);
     }
 }

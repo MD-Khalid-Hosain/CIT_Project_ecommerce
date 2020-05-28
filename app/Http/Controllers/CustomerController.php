@@ -6,6 +6,12 @@ use Illuminate\Http\Request;
 
 class CustomerController extends Controller
 {
+  public function __construct()
+  {
+      $this->middleware('auth');
+      $this->middleware('verified');
+      $this->middleware('checkrolecustomer');
+  }
     function homecustomer(){
       return view('cit.customer.home');
     }
