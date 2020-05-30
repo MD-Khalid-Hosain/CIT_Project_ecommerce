@@ -29,8 +29,8 @@ class StripePaymentController extends Controller
                "source" => $request->stripeToken,
                "description" => "Test Amount From Newton"
        ]);
+       
        //insert in order table start
-
        $order_id = Order::insertGetId([
          'user_id' => Auth::id(),
          'full_name' => $request->full_name,

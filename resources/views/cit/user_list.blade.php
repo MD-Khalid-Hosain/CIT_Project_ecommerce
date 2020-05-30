@@ -13,8 +13,46 @@
 @endsection
 @section('content')
   <div class="container">
+    <div class="row mb-3">
+      <div class="col-md-6 ">
+        <div class="card">
+        <div class="card-header">
+          Sale of Last 7 Days
+        </div>
+        <div class="card-body">
+
+
+
+          {{ $seven_days_sale_chart->container() }}
+          {{ $seven_days_sale_chart->script() }}
+
+        </div>
+      </div>
+      </div>
+      <div class="col-md-6 ">
+        <div class="card">
+        <div class="card-header">
+           Payment method Details
+        </div>
+        <div class="card-body">
+
+
+
+          {{ $payment_method_chart->container() }}
+          {{ $payment_method_chart->script() }}
+
+        </div>
+      </div>
+      </div>
+    </div>
+
+
+
+
+
+
     <div class="row">
-      <div class="col-md-8 offset-2">
+      <div class="col-md-12 ">
         <div class="card">
         <div class="card-header">
           Total user: {{ $user_lists->total() }}
