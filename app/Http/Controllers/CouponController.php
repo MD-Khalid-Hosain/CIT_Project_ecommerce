@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use Carbon\Carbon;
 use App\Mail\SendCoupon;
 use Mail;
+use App\Order_list;
 
 class CouponController extends Controller
 {
@@ -18,9 +19,14 @@ class CouponController extends Controller
      */
     public function index()
     {
+
         return view('cit.coupon.index', [
-          'coupons' => Coupon::all()
+
+          'valid_coupon' => Coupon::where('validity_till', '>=',Carbon::now()->format('Y-m-d'))->get(),
+          'in_valid_coupon' => Coupon::where('validity_till', '<',Carbon::now()->format('Y-m-d'))->get()
         ]);
+
+
     }
 
     /**

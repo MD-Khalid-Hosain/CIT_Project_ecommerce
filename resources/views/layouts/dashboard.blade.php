@@ -35,7 +35,7 @@
     <link href="{{ asset('dashboard_assets/lib/font-awesome/css/font-awesome.css') }}" rel="stylesheet">
     <link href="{{ asset('dashboard_assets/lib/Ionicons/css/ionicons.css') }}" rel="stylesheet">
     <link href="{{ asset('dashboard_assets/lib/perfect-scrollbar/css/perfect-scrollbar.css') }}" rel="stylesheet">
-
+    @yield('invoice_css')
 
     <!-- Starlight CSS -->
     <link rel="stylesheet" href="{{ asset('dashboard_assets/css/starlight.css') }}">

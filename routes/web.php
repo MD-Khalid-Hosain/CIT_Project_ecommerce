@@ -71,6 +71,8 @@ Route::resource('coupon', 'CouponController');
 
 //middleware controller for customer
 Route::get('home/customer', 'CustomerController@homecustomer');
+Route::get('order/download/{order_id}', 'CustomerController@order_download');
+Route::get('send/sms/{order_id}', 'CustomerController@sendsms');
 
 Auth::routes(['verify' => true]);
 

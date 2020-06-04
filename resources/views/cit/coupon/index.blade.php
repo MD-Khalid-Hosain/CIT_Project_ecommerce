@@ -17,10 +17,10 @@
 @section('content')
   <div class="container">
     <div class="row">
-      <div class="col-md-9">
+      <div class="col-md-9 mb-3">
         <div class="card">
           <div class="card-header">
-            Coupon list
+            Valid Coupon list
             @if (session('DeleteStatus'))
                 <div class="alert alert-danger">
                   {{ session('DeleteStatus') }}
@@ -46,7 +46,7 @@
 
               </thead>
               <tbody>
-                @forelse ($coupons as $coupon)
+                @forelse ($valid_coupon as $coupon)
                   <tr>
                     <td>{{ $loop->index + 1  }}</td>
                     <td>{{ $coupon->coupon_name  }}</td>
@@ -117,6 +117,68 @@
           </div>
         </div>
       </div>
+      <div class="col-md-9">
+        <div class="card">
+          <div class="card-header">
+              In Valid Coupon list
+            @if (session('DeleteStatus'))
+                <div class="alert alert-danger">
+                  {{ session('DeleteStatus') }}
+                </div>
+            @endif
+          </div>
+          <div class="card-body">
+            <table class="table table-bordered">
+              <thead>
+
+                  <tr>
+                    <th>SL. No</th>
+
+                    <th>Coupon Name</th>
+                    <th>Coupon Discount</th>
+                    <th>Coupon Validity Till</th>
+                    <th>Coupon Validity Status</th>
+                    <th>Validity in Days</th>
+                    <th>Created</th>
+                    <th>Action</th>
+
+                  </tr>
+
+              </thead>
+              <tbody>
+                @forelse ($in_valid_coupon as $coupon)
+                  <tr>
+                    <td>{{ $loop->index + 1  }}</td>
+                    <td>{{ $coupon->coupon_name  }}</td>
+                    <td>{{ $coupon->coupon_discount  }}%</td>
+                    <td>{{ $coupon->validity_till  }}</td>
+                    <td>
+                      @if ( $coupon->validity_till >=\Carbon\Carbon::now()->format('Y-m-d'))
+                        <span class="badge badge-success">Good</span>
+                        @else
+                          <span class="badge badge-danger">Bad</span>
+                      @endif
+                    </td>
+                    <td>
+                      @if ( $coupon->validity_till >=\Carbon\Carbon::now()->format('Y-m-d'))
+                        <span class="badge badge-success">{{ \Carbon\Carbon::parse($coupon->validity_till)->diffInDays() }} days left</span>
+                        @else
+                          <span class="badge badge-danger">ecpired {{ \Carbon\Carbon::parse($coupon->validity_till)->diffInDays() }} days ago</span>
+                      @endif
+
+                    </td>
+                    <td>{{ $coupon->created_at  }}</td>
+
+                  </tr>
+                @empty
+                  <span> Coupon Avilable</span>
+                @endforelse
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
     </div>
   </div>
 @endsection

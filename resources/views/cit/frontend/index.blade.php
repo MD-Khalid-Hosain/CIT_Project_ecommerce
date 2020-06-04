@@ -87,12 +87,12 @@ active
                 </div>
             </div>
             <ul class="row">
-              @for ($i=1; $i <= 4; $i++)
+              @foreach ($best_selling_products as $best_selling_product)
 
                 <li class="col-xl-3 col-lg-4 col-sm-6 col-12">
                     <div class="product-wrap">
                         <div class="product-img">
-                            <img src="{{ asset('frontend_assets/assets/images/product/1.jpg') }}" alt="">
+                            <img src="{{ asset('uploads/product_thumbnail') }}/{{ App\Product::find($best_selling_product->product_id)->product_thumbnail_photo }}" alt="">
                             <div class="product-icon flex-style">
                                 <ul>
                                     <li><a data-toggle="modal" data-target="#exampleModalCenter" href="javascript:void(0);"><i class="fa fa-eye"></i></a></li>
@@ -102,10 +102,8 @@ active
                             </div>
                         </div>
                         <div class="product-content">
-                            <h3><a href="single-product.html">Nature Honey</a></h3>
-                            <p class="pull-left">$125
-
-                            </p>
+                            <h3><a href="{{ route('product.show', App\Product::find($best_selling_product->product_id)->product_slug) }}">{{ App\Product::find($best_selling_product->product_id)->product_name }}</a></h3>
+                            <p class="pull-left">${{ App\Product::find($best_selling_product->product_id)->product_price }}</p>
                             <ul class="pull-right d-flex">
                                 <li><i class="fa fa-star"></i></li>
                                 <li><i class="fa fa-star"></i></li>
@@ -116,7 +114,9 @@ active
                         </div>
                     </div>
                 </li>
-              @endfor
+              @endforeach
+
+
 
             </ul>
         </div>
