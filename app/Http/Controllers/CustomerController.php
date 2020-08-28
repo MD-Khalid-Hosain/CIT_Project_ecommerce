@@ -58,4 +58,11 @@ class CustomerController extends Controller
         echo "Your sms send successfully !!";
       }
     }
+    function add_review(Request $request){
+    $order_list = Order_list::where('user_id', Auth::id())->where('product_id', $request->product_id)->whereNull('review')->first();
+    $order_list->review = $request->review;
+    $order_list->star = $request->star;
+    $order_list->save();
+      return back();
+    }
 }

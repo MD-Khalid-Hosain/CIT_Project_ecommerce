@@ -6,5 +6,5 @@ use Illuminate\Database\Eloquent\Model;
 
 class Order_list extends Model
 {
-    //
+    protected $fillable = ['review', 'star'];
 }

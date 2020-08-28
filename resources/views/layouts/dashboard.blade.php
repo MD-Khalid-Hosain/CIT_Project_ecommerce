@@ -93,6 +93,15 @@
             <span class="menu-item-label">Add Coupon</span>
           </div><!-- menu-item -->
         </a><!-- sl-menu-link -->
+        @can ('edit product')
+          <a href="{{ route('role_manager') }}" class="sl-menu-link @yield('role')">
+            <div class="sl-menu-item">
+              <i class="menu-item-icon icon fa fa-navicon  tx-20"></i>
+              <span class="menu-item-label">Role Managemer</span>
+            </div><!-- menu-item -->
+        @endcan
+
+        </a><!-- sl-menu-link -->
         @else
           <a href="{{ url('home/customer') }}" class="sl-menu-link @yield('Home')">
             <div class="sl-menu-item">

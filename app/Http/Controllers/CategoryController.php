@@ -62,6 +62,13 @@ class CategoryController extends Controller
         $new_category_location = base_path('public/uploads/category/'.$new_category_img_name);
         Image::make($uploaded_category_img)->resize(600, 470)->insert(public_path('uploads/category/khalid.png'), 'bottom-left', 20,20)->save($new_category_location);
 
+        //image upload without image package intervension
+      //  $productImage = $request->file('image');
+      // $file_name = uniqid('product_', true) . date('Ymdhms') . '.' . $productImage->extension();
+      // $productImage->storeAs('products', $file_name);
+      // $product->image = $file_name;
+
+
         /*==after upload photo update database new photo name==*/
         // Category::find($return_after_create->id)->update([
         //   'category_photo'=>$new_category_img_name
@@ -119,6 +126,12 @@ class CategoryController extends Controller
            Image::make($uploaded_category_img)->resize(600, 470)->insert(public_path('uploads/category/khalid.png'), 'bottom-left', 20,20)->save($new_category_location);
            $category->category_photo = $new_category_img_name;
 
+            //image upload without image package intervension
+          //  $productImage = $request->file('image');
+          // $file_name = uniqid('product_', true) . date('Ymdhms') . '.' . $productImage->extension();
+          // $productImage->storeAs('products', $file_name);
+          // $product->image = $file_name;
+
         }
         $category->category_name = $request->category_name;
         $category->save();
@@ -134,7 +147,12 @@ class CategoryController extends Controller
      */
     public function destroy(Category $category)
     {
-      $category->delete();
-        return back();
+
+      if(file_exists(base_path().'/public/uploads/category/'.$category->category_photo)){
+       @unlink(base_path().'/public/uploads/category/'.$category->category_photo);
+       $category->delete();
+         return back();
+      }
+
     }
 }

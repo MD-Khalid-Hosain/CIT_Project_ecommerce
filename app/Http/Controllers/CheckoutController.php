@@ -49,7 +49,7 @@ class CheckoutController extends Controller
               //decrement from product table start
             Product::find($cart_product->product_id)->decrement('quantity',$cart_product->amount);
             //decrement from product table end
-            
+
             //delete from cart table
             Cart::find($cart_product->id)->delete();
           }

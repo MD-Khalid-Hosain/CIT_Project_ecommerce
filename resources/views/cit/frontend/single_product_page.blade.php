@@ -62,12 +62,31 @@
                         <div class="rating-wrap fix">
                             <span class="pull-left">${{ $product_info->product_price }}</span>
                             <ul class="rating pull-right">
+                              @if (review_star($product_info->id) == 1)
+                                  <li><i class="fa fa-star"></i></li>
+                              @elseif (review_star($product_info->id) == 2)
+                                <li><i class="fa fa-star"></i></li>
+                                <li><i class="fa fa-star"></i></li>
+                              @elseif (review_star($product_info->id) == 3)
+                                <li><i class="fa fa-star"></i></li>
+                                <li><i class="fa fa-star"></i></li>
+                                <li><i class="fa fa-star"></i></li>
+                              @elseif (review_star($product_info->id) == 4)
+                                <li><i class="fa fa-star"></i></li>
+                                <li><i class="fa fa-star"></i></li>
+                                <li><i class="fa fa-star"></i></li>
+                                <li><i class="fa fa-star"></i></li>
+                              @elseif (review_star($product_info->id) == 5)
                                 <li><i class="fa fa-star"></i></li>
                                 <li><i class="fa fa-star"></i></li>
                                 <li><i class="fa fa-star"></i></li>
                                 <li><i class="fa fa-star"></i></li>
                                 <li><i class="fa fa-star"></i></li>
-                                <li>(05 Customar Review)</li>
+                              @else
+                                <li>No Review Yet !!</li>
+                              @endif
+
+                                <li>({{ App\Order_list::where('product_id', $product_info->id)->whereNotNull('review')->count() }} Customar Review)</li>
                             </ul>
                         </div>
                         <p>{{ $product_info->product_short_description }}
@@ -176,112 +195,111 @@
                         <div class="tab-pane" id="review">
                             <div class="review-wrap">
                                 <ul>
+                                  @foreach (App\Order_list::where('product_id', $product_info->id)->whereNotNull('review')->get() as $review)
+
                                     <li class="review-items">
                                         <div class="review-img">
-                                            <img src="assets/images/comment/1.png" alt="">
+                                            <img src="{{ asset('frontend_assets/assets/images/comment/1.png') }}" alt="">
                                         </div>
                                         <div class="review-content">
-                                            <h3><a href="#">GERALD BARNES</a></h3>
-                                            <span>27 Jun, 2019 at 2:30pm</span>
-                                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer accumsan egestas elese ifend. Phasellus a felis at estei to bibendum feugiat ut eget eni Praesent et messages in con sectetur posuere dolor non.</p>
+                                            <h3><a href="#">{{ App\User::find($review->user_id)->name }}</a></h3>
+                                            <span>{{ $review->updated_at->format('d/m/Y H:i:s A') }}</span>
+                                            <p>{{ $review->review }}</p>
                                             <ul class="rating">
+                                              @if ($review->star == 1)
+                                                  <li><i class="fa fa-star"></i></li>
+                                              @elseif ($review->star == 2)
+                                                <li><i class="fa fa-star"></i></li>
+                                                <li><i class="fa fa-star"></i></li>
+                                              @elseif ($review->star == 3)
+                                                <li><i class="fa fa-star"></i></li>
+                                                <li><i class="fa fa-star"></i></li>
+                                                <li><i class="fa fa-star"></i></li>
+                                              @elseif ($review->star == 4)
+                                                <li><i class="fa fa-star"></i></li>
+                                                <li><i class="fa fa-star"></i></li>
+                                                <li><i class="fa fa-star"></i></li>
+                                                <li><i class="fa fa-star"></i></li>
+                                              @elseif ($review->star == 5)
                                                 <li><i class="fa fa-star"></i></li>
                                                 <li><i class="fa fa-star"></i></li>
                                                 <li><i class="fa fa-star"></i></li>
                                                 <li><i class="fa fa-star"></i></li>
                                                 <li><i class="fa fa-star"></i></li>
+                                              @else
+                                                <li>No Review Yet !!</li>
+                                              @endif
                                             </ul>
                                         </div>
                                     </li>
-                                    <li class="review-items">
-                                        <div class="review-img">
-                                            <img src="assets/images/comment/2.png" alt="">
-                                        </div>
-                                        <div class="review-content">
-                                            <h3><a href="#">Olive Oil</a></h3>
-                                            <span>15 may, 2019 at 2:30pm</span>
-                                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer accumsan egestas elese ifend. Phasellus a felis at estei to bibendum feugiat ut eget eni Praesent et messages in con sectetur posuere dolor non.</p>
-                                            <ul class="rating">
-                                                <li><i class="fa fa-star"></i></li>
-                                                <li><i class="fa fa-star"></i></li>
-                                                <li><i class="fa fa-star"></i></li>
-                                                <li><i class="fa fa-star"></i></li>
-                                                <li><i class="fa fa-star-half-o"></i></li>
-                                            </ul>
-                                        </div>
-                                    </li>
-                                    <li class="review-items">
-                                        <div class="review-img">
-                                            <img src="assets/images/comment/3.png" alt="">
-                                        </div>
-                                        <div class="review-content">
-                                            <h3><a href="#">Nature Honey</a></h3>
-                                            <span>14 janu, 2019 at 2:30pm</span>
-                                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer accumsan egestas elese ifend. Phasellus a felis at estei to bibendum feugiat ut eget eni Praesent et messages in con sectetur posuere dolor non.</p>
-                                            <ul class="rating">
-                                                <li><i class="fa fa-star"></i></li>
-                                                <li><i class="fa fa-star"></i></li>
-                                                <li><i class="fa fa-star"></i></li>
-                                                <li><i class="fa fa-star"></i></li>
-                                                <li><i class="fa fa-star-o"></i></li>
-                                            </ul>
-                                        </div>
-                                    </li>
+                                      @endforeach
                                 </ul>
                             </div>
                             <div class="add-review">
                                 <h4>Add A Review</h4>
-                                <div class="ratting-wrap">
-                                    <table>
+                                @auth
+                                  @if (App\Order_list::where('user_id', Auth::id())->where('product_id',$product_info->id)->whereNull('review')->exists())
+                                    <form  action="{{ url('add/review') }}" method="post">
+                                      @csrf
+                                      <input type="hidden" name="product_id" value="{{ $product_info->id }}">
+                                    <div class="ratting-wrap">
+                                      <table>
                                         <thead>
-                                            <tr>
-                                                <th>task</th>
-                                                <th>1 Star</th>
-                                                <th>2 Star</th>
-                                                <th>3 Star</th>
-                                                <th>4 Star</th>
-                                                <th>5 Star</th>
-                                            </tr>
+                                          <tr>
+                                            <th>task</th>
+                                            <th>1 Star</th>
+                                            <th>2 Star</th>
+                                            <th>3 Star</th>
+                                            <th>4 Star</th>
+                                            <th>5 Star</th>
+                                          </tr>
                                         </thead>
                                         <tbody>
-                                            <tr>
-                                                <td>How Many Stars?</td>
-                                                <td>
-                                                    <input type="radio" name="a" />
-                                                </td>
-                                                <td>
-                                                    <input type="radio" name="a" />
-                                                </td>
-                                                <td>
-                                                    <input type="radio" name="a" />
-                                                </td>
-                                                <td>
-                                                    <input type="radio" name="a" />
-                                                </td>
-                                                <td>
-                                                    <input type="radio" name="a" />
-                                                </td>
-                                            </tr>
+                                          <tr>
+                                            <td>How Many Stars?</td>
+                                            <td>
+                                              <input type="radio" name="star" value="1" />
+                                            </td>
+                                            <td>
+                                              <input type="radio" name="star" value="2" />
+                                            </td>
+                                            <td>
+                                              <input type="radio" name="star" value="3"/>
+                                            </td>
+                                            <td>
+                                              <input type="radio" name="star" value="4" />
+                                            </td>
+                                            <td>
+                                              <input type="radio" name="star" value="5" />
+                                            </td>
+                                          </tr>
                                         </tbody>
-                                    </table>
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-6 col-12">
+                                      </table>
+                                    </div>
+                                    <div class="row">
+                                      <div class="col-md-6 col-12">
                                         <h4>Name:</h4>
-                                        <input type="text" placeholder="Your name here..." />
-                                    </div>
-                                    <div class="col-md-6 col-12">
+                                        <input type="text" placeholder="Your name here..." disabled value="{{ Auth::user()->name }}" />
+                                      </div>
+                                      <div class="col-md-6 col-12">
                                         <h4>Email:</h4>
-                                        <input type="email" placeholder="Your Email here..." />
-                                    </div>
-                                    <div class="col-12">
+                                        <input type="email" placeholder="Your Email here..." disabled value="{{ Auth::user()->email }}" />
+                                      </div>
+                                      <div class="col-12">
                                         <h4>Your Review:</h4>
-                                        <textarea name="massage" id="massage" cols="30" rows="10" placeholder="Your review here..."></textarea>
-                                    </div>
-                                    <div class="col-12">
+                                        <textarea name="review" id="massage" cols="30" rows="10" placeholder="Your review here..."></textarea>
+                                      </div>
+                                      <div class="col-12">
                                         <button class="btn-style">Submit</button>
+                                      </div>
                                     </div>
-                                </div>
+                                  </form>
+                                    @else
+                                      You provided your rating or you did not buy this product yer!
+                                  @endif
+                                  @else
+                                    please login
+                              @endauth
                             </div>
                         </div>
                     </div>

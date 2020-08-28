@@ -12,6 +12,7 @@ use Carbon\Carbon;
 use App\Category;
 use App\Product;
 use App\Http\Requests\Faq_Form_validate;
+use Spatie\QueryBuilder\QueryBuilder;
 class FrontendController extends Controller
 {
 
@@ -43,6 +44,20 @@ class FrontendController extends Controller
     return view('cit.frontend.faq', [
       'faqs' =>FaqForm::all()
     ]);
+  }
+  function search(){
+    $search = QueryBuilder::for(Product::class)
+    ->allowedFilters(['product_name','category_id'])
+    ->allowedSorts('product_price')
+    ->get();
+     ;
+     if ($_GET['sort'] == 'product_price') {
+       $search_product = $search->sortBy('product_price');
+     }else{
+       $search_product = $search->sortByDesc('product_price');
+     }
+
+    return view('cit.frontend.search',compact('search_product'));
   }
 
 }

@@ -6,6 +6,7 @@ Route::get('/contact/page','FrontendController@contact');
 Route::get('/about/page','FrontendController@about');
 Route::get('/faq/page','FrontendController@faq');
 Route::get('/shop/page','FrontendController@shop');
+Route::get('search','FrontendController@search');
 
 /*======End Routes for FrontendController======*/
 
@@ -73,12 +74,19 @@ Route::resource('coupon', 'CouponController');
 Route::get('home/customer', 'CustomerController@homecustomer');
 Route::get('order/download/{order_id}', 'CustomerController@order_download');
 Route::get('send/sms/{order_id}', 'CustomerController@sendsms');
+Route::post('add/review', 'CustomerController@add_review');
 
 Auth::routes(['verify' => true]);
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-
+//Role Controller start
+Route::get('role/manager', 'RoleController@role_manager')->name('role_manager');
+Route::post('add/role', 'RoleController@add_role');
+Route::post('assign/role', 'RoleController@assign_role');
+Route::get('role/permission/edit/{user_id}', 'RoleController@role_permission_edit');
+Route::post('change/permission/edit', 'RoleController@change_permission_edit');
+//Role Controller end
 
 
 // arithmetic oparation

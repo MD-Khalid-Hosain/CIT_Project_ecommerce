@@ -12,3 +12,15 @@ function cart_subtotal(){
   }
   return $total_price;
 }
+
+function review_star($product_id){
+  $count = App\Order_list::where('product_id', $product_id)->whereNotNull('star')->count();
+if (empty($count)) {
+  return 0;
+}
+else{
+
+  $star_amount = (App\Order_list::where('product_id', $product_id)->whereNotNull('star')->sum('star'))/(App\Order_list::where('product_id', $product_id)->whereNotNull('star')->count());
+  return floor($star_amount);
+  }
+}

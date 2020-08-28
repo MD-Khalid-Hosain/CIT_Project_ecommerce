@@ -2,6 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <title>Example 1</title>
     <style media="screen">
     .clearfix:after {
@@ -22,9 +23,11 @@ height: 29.7cm;
 margin: 0 auto;
 color: #001028;
 background: #FFFFFF;
-font-family: Arial, sans-serif;
+
+font-family: DejaVu Sans;
+
 font-size: 12px;
-font-family: Arial;
+
 }
 
 header {
@@ -191,7 +194,7 @@ text-align: center;
       </table>
       <div id="notices">
         <div>NOTICE:</div>
-        <div class="notice">A finance charge of 1.5% will be made on unpaid balances after 30 days.</div>
+        <div class="notice">A finance charge of 1.5% will be made on unpaid balances after 30 দিন.</div>
       </div>
     </main>
     <footer>
